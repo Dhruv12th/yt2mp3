@@ -28,7 +28,7 @@ def download():
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
-            return jsonify({"title": info['title'], "url": info['url']}, webbrowser.open(info['url']))
+            return jsonify({"title": info['title'], "url": info['url']}, webbrowser.open_new_tab(info['url']))
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
