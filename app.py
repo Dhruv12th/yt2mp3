@@ -22,6 +22,7 @@ def download():
                 'preferredcodec': 'mp3',
                 'preferredquality': '320',
             }],
+            'cookiefile': 'youtube.txt',
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
