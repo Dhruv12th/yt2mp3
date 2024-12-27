@@ -27,7 +27,8 @@ def download():
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
-            file_name = ydl.prepare_filename(info).replace(".webm", ".mp3")  # Ensure MP3 file extension            
+            file_name = ydl.prepare_filename(info).replace(".webm", ".mp3")  # Ensure MP3 file extension 
+            file_name = ydl.prepare_filename(info).replace(".weba", ".mp3")
             return jsonify({"title": info['title'], "url": info['url']})
 
     except Exception as e:
