@@ -24,8 +24,8 @@ def download():
                     'preferredquality': '320',
                 }
             ],
-            'cookiefile': 'youtube.txt',
-            'outtmpl': 'downloads/%(title)s.%(ext)s',  # Ensure files are saved as .mp3
+            #'cookiefile': 'youtube.txt',
+
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
