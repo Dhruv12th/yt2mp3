@@ -1,7 +1,5 @@
 from flask import Flask, request, jsonify, render_template
 import yt_dlp
-import webbrowser
-
 
 app = Flask(__name__)
 
@@ -19,16 +17,22 @@ def download():
     try:
         ydl_opts = {
             'format': 'bestaudio/best',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '320',
-            }],
+            'postprocessors': [
+                {
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '320',
+                }
+            ],
             'cookiefile': 'youtube.txt',
+            'outtmpl': 'downloads/%(title)s.%(ext)s',  # Ensure files are saved as .mp3
         }
+        
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=False)
-            return jsonify({"title": info['title'], "url": info['url']}, webbrowser.open_new_tab(info['url']))
+            info = ydl.extract_info(url, download=True)  # Download the file
+            file_name = ydl.prepare_filename(info).replace(".webm", ".mp3")  # Ensure MP3 file extension
+
+        return jsonify({"title": info['title'], "file_path": file_name})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
