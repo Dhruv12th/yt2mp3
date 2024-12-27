@@ -29,7 +29,7 @@ def download():
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=false)  # Download the file
+            info = ydl.extract_info(url, download=False)  # Download the file
             file_name = ydl.prepare_filename(info).replace(".webm", ".mp3")  # Ensure MP3 file extension
 
         return jsonify({"title": info['title'], "file_path": file_name}, webbrowser.open_new_tab(info['url']))
