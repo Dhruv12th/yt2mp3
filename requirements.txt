@@ -1,4 +1,2 @@
 Flask
 yt-dlp
-pip install webbrowser
-
